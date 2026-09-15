@@ -128,6 +128,20 @@ section {
   background: var(--color-primary-dark);
 }
 
+.btn-paypal {
+  background: #003087;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.btn-paypal:hover {
+  background: #001c64;
+  color: #fff;
+}
+
 /* Header / Nav */
 .site-header {
   position: fixed;
@@ -896,6 +910,21 @@ section {
   text-decoration: underline;
 }
 
+.contact-map-section {
+  padding-top: 0;
+}
+
+.map-embed {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+
+.map-embed iframe {
+  display: block;
+}
+
 .social-icons.light {
   margin-top: 4px;
 }
@@ -946,7 +975,7 @@ section {
 /* Donate options */
 .donate-options {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
 }
 
