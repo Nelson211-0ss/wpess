@@ -15,19 +15,40 @@ document.addEventListener("DOMContentLoaded", function () {
   var toggle = document.querySelector(".nav-toggle");
   var linksWrap = document.querySelector(".nav-links-wrap");
 
+  function openLinksWrap() {
+    linksWrap.classList.add("open");
+    linksWrap.style.maxHeight = linksWrap.scrollHeight + "px";
+  }
+
+  function closeLinksWrap() {
+    linksWrap.classList.remove("open");
+    linksWrap.style.maxHeight = "0px";
+  }
+
   if (toggle && linksWrap) {
     toggle.addEventListener("click", function () {
-      var isOpen = linksWrap.classList.toggle("open");
+      var isOpen = !linksWrap.classList.contains("open");
+      if (isOpen) {
+        openLinksWrap();
+      } else {
+        closeLinksWrap();
+      }
       toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
       toggle.classList.toggle("open", isOpen);
     });
 
-    linksWrap.querySelectorAll("a").forEach(function (link) {
+    linksWrap.querySelectorAll(".nav-links > li > a").forEach(function (link) {
       link.addEventListener("click", function () {
-        linksWrap.classList.remove("open");
+        closeLinksWrap();
         toggle.setAttribute("aria-expanded", "false");
         toggle.classList.remove("open");
       });
+    });
+
+    window.addEventListener("resize", function () {
+      if (linksWrap.classList.contains("open")) {
+        linksWrap.style.maxHeight = linksWrap.scrollHeight + "px";
+      }
     });
   }
 
@@ -36,8 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var item = btn.closest(".has-mega");
       if (!item) return;
+      var menu = item.querySelector(".mega-menu");
       var isOpen = item.classList.toggle("open");
       btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (menu) {
+        menu.style.maxHeight = isOpen ? menu.scrollHeight + "px" : "0px";
+      }
+      if (linksWrap && linksWrap.classList.contains("open")) {
+        window.requestAnimationFrame(function () {
+          linksWrap.style.maxHeight = linksWrap.scrollHeight + "px";
+        });
+      }
     });
   });
 
