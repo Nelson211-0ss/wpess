@@ -1345,11 +1345,11 @@ section {
   }
 
   .hero-media {
-    width: 200px;
-    height: 150px;
-    max-width: 200px;
+    width: 240px;
+    height: 180px;
+    max-width: 240px;
     justify-self: center;
-    margin: 0 auto 20px;
+    margin: 0 auto 16px;
   }
 
   .hero-inner {
