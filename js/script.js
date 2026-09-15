@@ -10,8 +10,18 @@ setHeaderHeightVar();
 window.addEventListener("resize", setHeaderHeightVar);
 window.addEventListener("load", setHeaderHeightVar);
 
+function updateHeaderScrollState() {
+  var header = document.querySelector(".site-header");
+  if (header) {
+    header.classList.toggle("scrolled", window.scrollY > 10);
+  }
+}
+updateHeaderScrollState();
+window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
+
 document.addEventListener("DOMContentLoaded", function () {
   setHeaderHeightVar();
+  updateHeaderScrollState();
   var toggle = document.querySelector(".nav-toggle");
   var linksWrap = document.querySelector(".nav-links-wrap");
 
