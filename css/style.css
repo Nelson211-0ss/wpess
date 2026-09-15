@@ -512,6 +512,10 @@ section {
   align-items: center;
 }
 
+.hero-inner > div {
+  min-width: 0;
+}
+
 .hero h1 {
   font-size: 2.6rem;
   margin-bottom: 18px;
@@ -1369,38 +1373,61 @@ section {
   }
 
   .hero {
-    padding: calc(var(--header-h, 64px) + 28px) 0 32px;
+    padding: calc(var(--header-h, 64px) + 24px) 0 40px;
     min-height: auto;
-  }
-
-  .hero-media {
-    width: 270px;
-    height: 200px;
-    max-width: 270px;
-    justify-self: center;
-    margin: 0 auto 14px;
   }
 
   .hero-inner {
     gap: 0;
   }
 
+  .hero-inner > div:not(.hero-media) {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .hero-media {
+    width: 260px;
+    height: 195px;
+    max-width: 100%;
+    justify-self: center;
+    margin: 0 auto 22px;
+  }
+
   .hero-tag {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   .hero h1 {
-    font-size: 1.7rem;
-    margin-bottom: 12px;
+    font-size: 1.75rem;
+    margin-bottom: 14px;
   }
 
   .hero p {
     font-size: 1rem;
-    margin-bottom: 20px;
+    margin: 0 auto 24px;
+    max-width: 34ch;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    text-align: center;
   }
 
   .hero-stat-badge {
-    margin-top: 16px;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .hero-stat-badge > div {
+    min-width: 0;
+    text-align: left;
   }
 
   .card-grid,
