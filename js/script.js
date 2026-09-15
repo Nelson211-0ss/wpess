@@ -82,12 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   var searchIndex = [
-    { title: "Home", url: "index.html", keywords: "home wpess women peace envoy south sudan" },
-    { title: "About Us", url: "about.html", keywords: "about mission story approach dialogue leadership team magwi county" },
-    { title: "Programs", url: "programs.html", keywords: "programs sport for peace football tournament magwi county" },
-    { title: "Donate", url: "donate.html", keywords: "donate donation give support bank transfer mobile money" },
-    { title: "News & Events", url: "news.html", keywords: "news events updates sport for peace tournament recap newsletter" },
-    { title: "Contact", url: "contact.html", keywords: "contact email phone location social media volunteer partner message" }
+    { title: "Home", url: "/", keywords: "home wpess women peace envoy south sudan" },
+    { title: "About Us", url: "/about/", keywords: "about mission story approach dialogue leadership team magwi county" },
+    { title: "Programs", url: "/programs/", keywords: "programs sport for peace football tournament magwi county" },
+    { title: "Donate", url: "/donate/", keywords: "donate donation give support bank transfer mobile money" },
+    { title: "News & Events", url: "/news/", keywords: "news events updates sport for peace tournament recap newsletter" },
+    { title: "Contact", url: "/contact/", keywords: "contact email phone location social media volunteer partner message" }
   ];
 
   var searchWrap = document.querySelector(".nav-search");

@@ -489,7 +489,7 @@ section {
   background-color: var(--color-primary-dark);
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23045173' fill-opacity='0.72'/%3E%3C/svg%3E"),
-    url("images/savanna-landscape.jpg");
+    url("/images/savanna-landscape.jpg");
   background-size: cover, cover;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
@@ -659,7 +659,7 @@ section {
   background-color: var(--color-primary-dark);
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23045173' fill-opacity='0.72'/%3E%3C/svg%3E"),
-    url("images/savanna-landscape.jpg");
+    url("/images/savanna-landscape.jpg");
   background-size: cover, cover;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
