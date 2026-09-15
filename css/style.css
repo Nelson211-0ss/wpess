@@ -216,7 +216,6 @@ section {
   position: absolute;
   top: calc(100% + 18px);
   left: 50%;
-  transform: translateX(-50%);
   width: 640px;
   max-width: 90vw;
   background: var(--color-surface);
@@ -224,13 +223,20 @@ section {
   border-radius: 14px;
   box-shadow: var(--shadow);
   padding: 28px;
-  display: none;
   z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
 }
 
 .has-mega:hover .mega-menu,
 .has-mega.open .mega-menu {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
 .mega-grid {
@@ -550,6 +556,11 @@ section {
   align-items: center;
 }
 
+.feature-split p {
+  text-align: justify;
+  hyphens: none;
+}
+
 .feature-media {
   background: var(--color-primary-light);
   border-radius: var(--radius);
@@ -621,10 +632,94 @@ section {
 }
 
 .form-field label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-weight: 600;
   margin-bottom: 6px;
   font-size: 0.9rem;
+  color: var(--color-ink);
+}
+
+.form-field label svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Contact page */
+.contact-grid {
+  align-items: stretch;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-intro {
+  color: var(--color-muted);
+  margin-bottom: 26px;
+}
+
+.contact-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.contact-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-detail-item .icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.contact-detail-item strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.contact-detail-item p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.contact-detail-item a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-detail-item a:hover {
+  text-decoration: underline;
+}
+
+.social-icons.light {
+  margin-top: 4px;
+}
+
+.social-icons.light a {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.social-icons.light a:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn svg {
+  vertical-align: -2px;
+  margin-right: 6px;
 }
 
 .form-field input,
@@ -696,6 +791,11 @@ section {
   padding: 28px;
   margin-bottom: 24px;
   box-shadow: var(--shadow);
+}
+
+.news-post p {
+  text-align: justify;
+  hyphens: none;
 }
 
 .news-meta {
@@ -965,14 +1065,19 @@ section {
     background: var(--color-surface);
     flex-direction: column;
     align-items: flex-start;
-    padding: 18px 20px;
+    padding: 0 20px;
     border-bottom: 1px solid var(--color-border);
-    display: none;
     gap: 16px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
   }
 
   .nav-links.open {
-    display: flex;
+    max-height: 640px;
+    opacity: 1;
+    padding: 18px 20px;
   }
 
   .nav-toggle {
@@ -987,16 +1092,24 @@ section {
   .mega-toggle {
     display: block;
     margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .has-mega.open .mega-toggle {
+    transform: rotate(180deg);
   }
 
   .mega-menu {
     position: static;
-    transform: none;
     width: 100%;
     max-width: none;
     box-shadow: none;
     border: none;
-    padding: 12px 0 4px;
+    padding: 0;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
   }
 
   .mega-grid {
@@ -1005,11 +1118,14 @@ section {
   }
 
   .has-mega:hover .mega-menu {
-    display: none;
+    visibility: hidden;
+    max-height: 0;
   }
 
   .has-mega.open .mega-menu {
-    display: block;
+    visibility: visible;
+    max-height: 600px;
+    padding: 12px 0 4px;
   }
 
   .hero h1 {
@@ -1044,5 +1160,54 @@ section {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+  }
+
+  .feature-split p,
+  .news-post p {
+    text-align: left;
+  }
+}
+
+/* Scroll-reveal animation (class added by script.js; content stays fully
+   visible if JS never runs, since the .reveal class is never in the HTML) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 0.8, 0.24, 1),
+    transform 0.7s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gentle continuous float on the hero image panel */
+@keyframes wpess-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-media {
+  animation: wpess-float 6s ease-in-out infinite;
+}
+
+/* Respect users who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    transition: opacity 0.3s ease;
+    transform: none;
+  }
+
+  .hero-media {
+    animation: none;
+  }
+
+  .btn:hover {
+    transform: none;
   }
 }
