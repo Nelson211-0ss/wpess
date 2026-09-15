@@ -1,12 +1,33 @@
 // WPESS site scripts
 
-document.addEventListener("DOMContentLoaded", function () {
-  var toggle = document.querySelector(".nav-toggle");
-  var links = document.querySelector(".nav-links");
+function setHeaderHeightVar() {
+  var header = document.querySelector(".site-header");
+  if (header) {
+    document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
+  }
+}
+setHeaderHeightVar();
+window.addEventListener("resize", setHeaderHeightVar);
+window.addEventListener("load", setHeaderHeightVar);
 
-  if (toggle && links) {
+document.addEventListener("DOMContentLoaded", function () {
+  setHeaderHeightVar();
+  var toggle = document.querySelector(".nav-toggle");
+  var linksWrap = document.querySelector(".nav-links-wrap");
+
+  if (toggle && linksWrap) {
     toggle.addEventListener("click", function () {
-      links.classList.toggle("open");
+      var isOpen = linksWrap.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.classList.toggle("open", isOpen);
+    });
+
+    linksWrap.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        linksWrap.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.classList.remove("open");
+      });
     });
   }
 
@@ -19,6 +40,78 @@ document.addEventListener("DOMContentLoaded", function () {
       btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
   });
+
+  var searchIndex = [
+    { title: "Home", url: "index.html", keywords: "home wpess women peace envoy south sudan" },
+    { title: "About Us", url: "about.html", keywords: "about mission story approach dialogue leadership team magwi county" },
+    { title: "Programs", url: "programs.html", keywords: "programs sport for peace football tournament magwi county" },
+    { title: "Donate", url: "donate.html", keywords: "donate donation give support bank transfer mobile money" },
+    { title: "News & Events", url: "news.html", keywords: "news events updates sport for peace tournament recap newsletter" },
+    { title: "Contact", url: "contact.html", keywords: "contact email phone location social media volunteer partner message" }
+  ];
+
+  var searchWrap = document.querySelector(".nav-search");
+  var searchToggle = document.querySelector(".search-toggle");
+  var searchInput = document.querySelector(".nav-search-input");
+  var searchResults = document.querySelector(".nav-search-results");
+
+  function renderSearchResults(query) {
+    if (!searchResults) return;
+    searchResults.innerHTML = "";
+    if (!query) return;
+    var q = query.trim().toLowerCase();
+    if (!q) return;
+    var matches = searchIndex.filter(function (page) {
+      return page.title.toLowerCase().indexOf(q) !== -1 || page.keywords.indexOf(q) !== -1;
+    });
+    if (!matches.length) {
+      var empty = document.createElement("p");
+      empty.className = "nav-search-empty";
+      empty.textContent = "No pages found.";
+      searchResults.appendChild(empty);
+      return;
+    }
+    matches.forEach(function (page) {
+      var a = document.createElement("a");
+      a.href = page.url;
+      a.textContent = page.title;
+      searchResults.appendChild(a);
+    });
+  }
+
+  if (searchWrap && searchToggle && searchInput) {
+    searchToggle.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var isOpen = searchWrap.classList.toggle("open");
+      searchToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (isOpen) {
+        searchInput.focus();
+      }
+    });
+
+    searchInput.addEventListener("input", function () {
+      renderSearchResults(searchInput.value);
+    });
+
+    searchInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        var firstResult = searchResults.querySelector("a");
+        if (firstResult) {
+          window.location.href = firstResult.getAttribute("href");
+        }
+      } else if (event.key === "Escape") {
+        searchWrap.classList.remove("open");
+        searchToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!searchWrap.contains(event.target)) {
+        searchWrap.classList.remove("open");
+        searchToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
   document.querySelectorAll("form[data-local-only]").forEach(function (form) {
     form.addEventListener("submit", function (event) {
