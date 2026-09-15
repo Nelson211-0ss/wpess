@@ -990,7 +990,6 @@ section {
 
 .contact-strip-grid {
   background-color: var(--color-accent);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='2' cy='2' r='1.6' fill='%23ffffff' fill-opacity='0.14'/%3E%3C/svg%3E");
   border-radius: 20px;
   padding: 30px 34px;
   display: grid;
@@ -1142,7 +1141,7 @@ section {
 .social-icons a {
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
