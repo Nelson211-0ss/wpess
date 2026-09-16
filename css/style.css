@@ -1063,6 +1063,13 @@ section {
   margin: 40px 0 -44px;
 }
 
+/* When it directly follows the photo CTA banner, pull it up so the banner's
+   background image and dark overlay carry through underneath the card
+   instead of a strip of plain page background showing between the two */
+.cta-banner + .contact-strip {
+  margin-top: -40px;
+}
+
 .contact-strip-grid {
   background-color: var(--color-accent);
   border-radius: 20px;
@@ -1460,6 +1467,10 @@ section {
 
   .contact-strip {
     margin: 24px 0 -20px;
+  }
+
+  .cta-banner + .contact-strip {
+    margin-top: -20px;
   }
 
   .contact-strip-grid {
