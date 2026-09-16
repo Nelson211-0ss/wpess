@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var revealTargets = document.querySelectorAll(
-    ".card, .section-heading, .feature-media, .feature-split > div, .cta-banner, .news-post, .donate-option, .about-timeline-item, .about-pillar-card, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
+    ".card, .section-heading, .feature-media, .feature-split > div, .news-post, .donate-option, .about-timeline-item, .about-pillar-card, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
   );
 
   revealTargets.forEach(function (el) {
