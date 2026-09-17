@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var revealTargets = document.querySelectorAll(
-    ".card, .section-heading, .feature-media, .feature-split > div, .news-post, .donate-option, .about-timeline-item, .about-pillar-card, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
+    ".card, .section-heading, .feature-media, .feature-split > div, .news-post, .donate-option, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
   );
 
   revealTargets.forEach(function (el) {
@@ -274,39 +274,6 @@ document.addEventListener("DOMContentLoaded", function () {
     statNumbers.forEach(animateCount);
   }
 
-  var filterBtns = document.querySelectorAll(".program-filter-btn");
-  var programCards = document.querySelectorAll(".program-card");
-
-  if (filterBtns.length && programCards.length) {
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        filterBtns.forEach(function (b) {
-          b.classList.remove("active");
-        });
-        btn.classList.add("active");
-        var filter = btn.getAttribute("data-filter");
-        programCards.forEach(function (card) {
-          var match = filter === "all" || card.getAttribute("data-category") === filter;
-          if (match) {
-            card.style.display = "";
-            window.requestAnimationFrame(function () {
-              card.classList.remove("is-hidden");
-            });
-          } else {
-            card.classList.add("is-hidden");
-          }
-        });
-      });
-    });
-
-    programCards.forEach(function (card) {
-      card.addEventListener("transitionend", function (event) {
-        if (event.propertyName === "opacity" && card.classList.contains("is-hidden")) {
-          card.style.display = "none";
-        }
-      });
-    });
-  }
 
   var slideshow = document.querySelector(".hero-slideshow");
   if (slideshow) {
