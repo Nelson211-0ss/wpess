@@ -1,5 +1,36 @@
 // WPESS site scripts
 
+(function () {
+  var preloader = document.getElementById("preloader");
+  if (!preloader) return;
+  var start = Date.now();
+  var minDisplay = 400;
+  var hidden = false;
+
+  function hidePreloader() {
+    if (hidden) return;
+    hidden = true;
+    var wait = Math.max(minDisplay - (Date.now() - start), 0);
+    window.setTimeout(function () {
+      preloader.classList.add("is-hidden");
+      window.setTimeout(function () {
+        if (preloader.parentNode) {
+          preloader.parentNode.removeChild(preloader);
+        }
+      }, 550);
+    }, wait);
+  }
+
+  if (document.readyState === "complete") {
+    // The load event already fired before this script ran (fast cache hit)
+    hidePreloader();
+  } else {
+    window.addEventListener("load", hidePreloader);
+  }
+  // Safety net in case the load event never fires (e.g. a broken asset)
+  window.setTimeout(hidePreloader, 4000);
+})();
+
 function setHeaderHeightVar() {
   var header = document.querySelector(".site-header");
   if (header) {
