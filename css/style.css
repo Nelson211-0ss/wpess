@@ -1089,35 +1089,104 @@ section {
   font-weight: 600;
 }
 
-/* Timeline / news */
-.news-post {
+/* News */
+.news-feature-card {
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  background: var(--color-surface);
-  padding: 28px;
-  margin-bottom: 24px;
+  overflow: hidden;
   box-shadow: var(--shadow);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.news-post p {
-  text-align: justify;
-  hyphens: none;
+.news-feature-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.news-feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.news-feature-category {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.news-feature-body {
+  padding: 32px 36px 36px;
+}
+
+.news-feature-body h3 {
+  font-size: 1.6rem;
+  margin: 6px 0 16px;
+}
+
+.news-feature-body p {
+  color: var(--color-muted);
 }
 
 .news-meta {
-  color: var(--color-muted);
-  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+}
+
+.news-secondary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.news-empty-state {
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+}
+
+.news-empty-state .icon-badge {
+  margin: 0 auto 14px;
+}
+
+.news-empty-eyebrow {
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: 8px;
 }
 
-.placeholder-card {
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
-  padding: 24px;
+.news-empty-state h3 {
+  margin-bottom: 6px;
+  font-size: 1.05rem;
+}
+
+.news-empty-state p {
   color: var(--color-muted);
-  background: rgba(0, 0, 0, 0.015);
+  margin: 0;
+  font-size: 0.92rem;
 }
 
 /* Contact strip: an inset card that stands between the page content and the footer,
@@ -1554,8 +1623,7 @@ section {
     text-align: left;
   }
 
-  .feature-split p,
-  .news-post p {
+  .feature-split p {
     text-align: left;
   }
 }
@@ -2008,6 +2076,7 @@ section {
   .about-team-grid,
   .program-grid,
   .programs-flagship-stats,
+  .news-secondary-grid,
   .testimonial-grid {
     grid-template-columns: 1fr;
   }

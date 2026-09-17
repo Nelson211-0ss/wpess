@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var revealTargets = document.querySelectorAll(
-    ".card, .section-heading, .feature-media, .feature-split > div, .news-post, .donate-option, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
+    ".card, .section-heading, .feature-media, .feature-split > div, .news-feature-card, .news-empty-state, .donate-option, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
   );
 
   revealTargets.forEach(function (el) {
