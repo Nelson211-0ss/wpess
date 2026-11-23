@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var revealTargets = document.querySelectorAll(
-    ".card, .section-heading, .feature-media, .feature-split > div, .news-feature-card, .news-empty-state, .donate-option, .about-value-card, .about-team-card, .about-quote-card, .program-card, .testimonial-card, .partner-logo"
+    ".card, .section-heading, .section-head, .feature-split > div, .news-feature-card, .news-empty-state, .donate-option, .about-team-card, .testimonial-card, .partner-logo, .tri-card, .cat-tile, .cause-card, .collage, .who-text, .impact-grid > div, .newsletter-card, .contact-panel, .contact-form-card, .stats-grid > div, .cta-banner .container"
   );
 
   revealTargets.forEach(function (el) {
@@ -216,12 +216,20 @@ document.addEventListener("DOMContentLoaded", function () {
       function (entries, observer) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
+            var el = entry.target;
+            el.classList.add("in-view");
+            observer.unobserve(el);
+            // Once the entrance has played, drop the reveal classes so the
+            // element's own hover transitions (lift, shadow) work normally.
+            var delay = parseInt(el.style.transitionDelay, 10) || 0;
+            window.setTimeout(function () {
+              el.classList.remove("reveal", "in-view");
+              el.style.transitionDelay = "";
+            }, delay + 900);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     revealTargets.forEach(function (el) {
       revealObserver.observe(el);
@@ -274,6 +282,29 @@ document.addEventListener("DOMContentLoaded", function () {
     statNumbers.forEach(animateCount);
   }
 
+
+  // Progress rings fill in when they scroll into view
+  var rings = document.querySelectorAll(".ring");
+  if ("IntersectionObserver" in window && !reduceMotion && rings.length) {
+    var ringObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    rings.forEach(function (ring) {
+      ringObserver.observe(ring);
+    });
+  } else {
+    rings.forEach(function (ring) {
+      ring.classList.add("no-anim");
+    });
+  }
 
   var slideshow = document.querySelector(".hero-slideshow");
   if (slideshow) {
